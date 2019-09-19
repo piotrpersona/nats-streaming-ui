@@ -1,5 +1,6 @@
 .MuiDrawer-paper {
   height: 100vh !important;
+  position: relative!important;
 }
 
 ul a {
@@ -53,7 +54,7 @@ ul a {
   padding-bottom: 5px;
 }
 
-.messages-body{
+.messages-body {
   height: 75vh;
   overflow-x: auto;
 }
@@ -62,12 +63,12 @@ ul a {
   text-align: right;
 }
 
-.channels-row{
+.channels-row {
   cursor: pointer;
 }
 
-.channels-row:hover{
-  background: rgba(0,0,0, .03);
+.channels-row:hover {
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .content-divider {
@@ -156,31 +157,13 @@ ul a {
 }
 
 .gradient-neuromancer {
-  background: #f953c6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #b91d73,
-    #f953c6
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #b91d73,
-    #f953c6
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #f953c6;
+  background: -webkit-linear-gradient(to right, #b91d73, #f953c6);
+  background: linear-gradient(to right, #b91d73, #f953c6);
 }
 
 .gradient-sunset {
-  background: #355c7d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #c06c84,
-    #6c5b7b,
-    #355c7d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #355c7d;
+  background: -webkit-linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
+  background: linear-gradient(to right, #c06c84, #6c5b7b, #355c7d);
 }
