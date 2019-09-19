@@ -1,0 +1,186 @@
+.MuiDrawer-paper {
+  height: 100vh !important;
+}
+
+ul a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.app {
+  display: flex;
+}
+
+.card-item {
+  padding-top: 60px !important;
+}
+
+.card-item h2 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-item h2,
+.card-item h5 {
+  color: #fff;
+}
+
+.content {
+  flex-grow: 1;
+  height: 100vh;
+  overflow: auto;
+}
+
+.container {
+  padding-top: 100px;
+  padding-bottom: 40px;
+}
+
+.paper {
+  padding: 20px;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  height: 240px;
+}
+
+.title-container {
+  padding-top: 12px;
+}
+
+.title-message {
+  padding-top: 12px;
+  padding-bottom: 5px;
+}
+
+.messages-body{
+  height: 75vh;
+  overflow-x: auto;
+}
+
+.buttons-container {
+  text-align: right;
+}
+
+.channels-row{
+  cursor: pointer;
+}
+
+.channels-row:hover{
+  background: rgba(0,0,0, .03);
+}
+
+.content-divider {
+  margin-top: 20px !important;
+}
+
+.table-content {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.add-button {
+  background: #00bcd4 !important;
+  margin-right: 20px !important;
+}
+
+.refresh-button {
+  background: #ff4081 !important;
+  margin-right: 20px !important;
+}
+
+.message-button {
+  background: #7b1fa2 !important;
+}
+
+.refresh-button svg,
+.add-button svg,
+.message-button svg {
+  color: #fff;
+}
+
+.checkGreen {
+  color: #43a047;
+}
+
+.clearRed {
+  color: #ff5252;
+}
+
+.dashboard-cards {
+  height: 340px;
+}
+
+.dashboard-statuses {
+  margin-top: 20px !important;
+}
+
+.colored-navbar {
+  background: #303f9f;
+  background: -webkit-linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+  background: -moz- oldlinear-gradient(45deg, #303f9f, #7b1fa2) !important;
+  background: -o-linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+  background: linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+}
+
+.gradient-cyan {
+  background: #0288d1;
+  background: -webkit-linear-gradient(45deg, #0288d1, #26c6da) !important;
+  background: -moz- oldlinear-gradient(45deg, #0288d1, #26c6da) !important;
+  background: -o-linear-gradient(45deg, #0288d1, #26c6da) !important;
+  background: linear-gradient(45deg, #0288d1, #26c6da) !important;
+}
+
+.gradient-pink {
+  background: #ff5252;
+  background: -webkit-linear-gradient(45deg, #ff5252, #f48fb1) !important;
+  background: -moz- oldlinear-gradient(45deg, #ff5252, #f48fb1) !important;
+  background: -o-linear-gradient(45deg, #ff5252, #f48fb1) !important;
+  background: linear-gradient(45deg, #ff5252, #f48fb1) !important;
+}
+
+.gradient-amber {
+  background: #ff6f00;
+  background: -webkit-linear-gradient(45deg, #ff6f00, #ffca28) !important;
+  background: -moz- oldlinear-gradient(45deg, #ff6f00, #ffca28) !important;
+  background: -o-linear-gradient(45deg, #ff6f00, #ffca28) !important;
+  background: linear-gradient(45deg, #ff6f00, #ffca28) !important;
+}
+
+.gradient-teal {
+  background: #43a047;
+  background: -webkit-linear-gradient(45deg, #43a047, #1de9b6) !important;
+  background: -moz- oldlinear-gradient(45deg, #43a047, #1de9b6) !important;
+  background: -o-linear-gradient(45deg, #43a047, #1de9b6) !important;
+  background: linear-gradient(45deg, #43a047, #1de9b6) !important;
+}
+
+.gradient-neuromancer {
+  background: #f953c6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient-sunset {
+  background: #355c7d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #c06c84,
+    #6c5b7b,
+    #355c7d
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #c06c84,
+    #6c5b7b,
+    #355c7d
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
