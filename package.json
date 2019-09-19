@@ -9,7 +9,6 @@
     "axios": "^0.19.0",
     "clsx": "^1.0.4",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^0.20.0",
     "nats-nerve": "^1.0.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
