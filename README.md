@@ -35,6 +35,11 @@ node ./server/index.js
 - [React](https://reactjs.org)
 - [Socket.io](https://socket.io/)
 - [Express](https://expressjs.com)
+- [material-ui](https://material-ui.com/)
+- [nats-nerve](https://www.npmjs.com/package/nats-nerve)
+- [shortid](https://www.npmjs.com/package/shortid)
+- [axios](https://www.npmjs.com/package/axios)
+- [clsx](https://www.npmjs.com/package/clsx)
 
 ## Inspired By 
 - [nats-streaming-console by KualiCo](https://github.com/KualiCo/nats-streaming-console)
