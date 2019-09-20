@@ -37,7 +37,7 @@ class Subscriptions extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("ws://localhost:8282/");
+    this.socket = io("/");
     this.update();
   }
 

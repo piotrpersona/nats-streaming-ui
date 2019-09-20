@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("ws://localhost:8282/");
+    this.socket = io("/");
 
     this.update();
 
@@ -51,6 +51,13 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    let uptime = null;
+    if (this.state.dashboard) {
+      uptime = this.state.dashboard.uptime
+        .replace(/m|h/g, ":")
+        .replace(/s/g, "");
+    }
+
     return (
       this.state.dashboard && (
         <main className="content">
@@ -58,7 +65,7 @@ class Dashboard extends React.Component {
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={2}>
                 <Paper className={clsx("paper", "card-item", "gradient-cyan")}>
-                  <Typography variant="h2" component="h2" align="center">
+                  <Typography variant="h4" component="h2" align="center">
                     {this.state.dashboard.clients}
                   </Typography>
                   <Typography variant="h5" component="h5" align="center" noWrap>
@@ -68,7 +75,7 @@ class Dashboard extends React.Component {
               </Grid>
               <Grid item xs={12} md={12} lg={2}>
                 <Paper className={clsx("paper", "card-item", "gradient-amber")}>
-                  <Typography variant="h2" component="h2" align="center">
+                  <Typography variant="h4" component="h2" align="center">
                     {this.state.dashboard.channels}
                   </Typography>
                   <Typography variant="h5" component="h5" align="center" noWrap>
@@ -85,7 +92,7 @@ class Dashboard extends React.Component {
                     "gradient-pink"
                   )}
                 >
-                  <Typography variant="h2" component="h2" align="center">
+                  <Typography variant="h4" component="h2" align="center">
                     {this.state.dashboard.subscriptions}
                   </Typography>
                   <Typography variant="h5" component="h5" align="center" noWrap>
@@ -102,7 +109,7 @@ class Dashboard extends React.Component {
                     "gradient-teal"
                   )}
                 >
-                  <Typography variant="h2" component="h2" align="center">
+                  <Typography variant="h4" component="h2" align="center">
                     {this.state.dashboard.messages}
                   </Typography>
                   <Typography variant="h5" component="h5" align="center" noWrap>
@@ -119,7 +126,7 @@ class Dashboard extends React.Component {
                     "gradient-neuromancer"
                   )}
                 >
-                  <Typography variant="h2" component="h2" align="center">
+                  <Typography variant="h4" component="h2" align="center">
                     {Number(this.state.dashboard.size / 1024 / 1024).toFixed(2)}{" "}
                     Mb
                   </Typography>
@@ -137,8 +144,8 @@ class Dashboard extends React.Component {
                     "gradient-sunset"
                   )}
                 >
-                  <Typography variant="h2" component="h2" align="center">
-                    {this.state.dashboard.uptime}
+                  <Typography variant="h4" component="h2" align="center">
+                    {uptime}
                   </Typography>
                   <Typography variant="h5" component="h5" align="center" noWrap>
                     Uptime

@@ -21,7 +21,7 @@ import shortid from "shortid";
 class Messages extends React.Component {
   state = { messages: [], socket: null, channelId: null };
   componentDidMount() {
-    this.socket = io("ws://localhost:8282/");
+    this.socket = io("/");
 
     this.setState(
       {
