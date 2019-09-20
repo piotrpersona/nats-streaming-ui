@@ -1,6 +1,6 @@
 {
   "name": "nats-streaming-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "GUI for Nats Streaming server",
   "main": "./server/index.js",
   "keywords": [
