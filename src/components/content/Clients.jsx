@@ -36,7 +36,6 @@ class Clients extends React.Component {
     this.socket = null;
   }
   render() {
-    console.log(this.state.clients);
     return (
       <main className="content">
         <Container maxWidth={false} className="container">
@@ -52,39 +51,44 @@ class Clients extends React.Component {
               </Typography>
             </Grid>
             <Grid item xs={6} md={6} lg={11} className="buttons-container">
-              <Fab className="refresh-button" onClick={() => this.update()}>
+              <Fab
+                className="refresh-button-subs"
+                onClick={() => this.update()}
+              >
                 <Refresh />
               </Fab>
             </Grid>
           </Grid>
 
           <Grid container>
-            <Paper className="table-content">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Client name</TableCell>
-                    <TableCell>Inbox ID</TableCell>
-                    <TableCell>Subscriptions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.clients.map(row => (
-                    <TableRow key={shortid.generate()}>
-                      <TableCell component="th" scope="row">
-                        {row.id}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.inbox}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.subscriptions_number}
-                      </TableCell>
+            <Grid item xs={6} md={6} lg={12}>
+              <Paper className="table-content">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Client name</TableCell>
+                      <TableCell>Inbox ID</TableCell>
+                      <TableCell>Subscriptions</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.clients.map(row => (
+                      <TableRow key={shortid.generate()}>
+                        <TableCell component="th" scope="row">
+                          {row.id}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.inbox}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.subscriptions_number}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+            </Grid>
           </Grid>
         </Container>
       </main>

@@ -62,64 +62,69 @@ class Subscriptions extends React.Component {
               </Typography>
             </Grid>
             <Grid item xs={6} md={6} lg={11} className="buttons-container">
-              <Fab className="refresh-button" onClick={() => this.update()}>
+              <Fab
+                className="refresh-button-subs"
+                onClick={() => this.update()}
+              >
                 <Refresh />
               </Fab>
             </Grid>
           </Grid>
 
-          <Grid container>
-            <Paper className="table-content">
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Client name</TableCell>
-                    <TableCell>Channel</TableCell>
-                    <TableCell>Inbox</TableCell>
-                    <TableCell>Online</TableCell>
-                    <TableCell>Durable</TableCell>
-                    <TableCell>Stalled</TableCell>
-                    <TableCell>Ask wait, sec</TableCell>
-                    <TableCell>Max inflight</TableCell>
-                    <TableCell>Pending</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.state.subscriptions.map(row => (
-                    <TableRow key={shortid.generate()}>
-                      <TableCell component="th" scope="row">
-                        {row.client_id}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.channel_name}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.inbox}
-                      </TableCell>
-
-                      <TableCell component="th" scope="row">
-                        {this.makeButton(!row.is_offline)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {this.makeButton(row.is_durable)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {this.makeButton(row.is_stalled)}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.ack_wait}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.max_inflight}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.pending_count}
-                      </TableCell>
+          <Grid container spacing={3}>
+            <Grid item xs={6} md={6} lg={12}>
+              <Paper className="table-content">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Client name</TableCell>
+                      <TableCell>Channel</TableCell>
+                      <TableCell>Inbox</TableCell>
+                      <TableCell>Online</TableCell>
+                      <TableCell>Durable</TableCell>
+                      <TableCell>Stalled</TableCell>
+                      <TableCell>Ask wait, sec</TableCell>
+                      <TableCell>Max inflight</TableCell>
+                      <TableCell>Pending</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.subscriptions.map(row => (
+                      <TableRow key={shortid.generate()}>
+                        <TableCell component="th" scope="row">
+                          {row.client_id}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.channel_name}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.inbox}
+                        </TableCell>
+
+                        <TableCell component="th" scope="row">
+                          {this.makeButton(!row.is_offline)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {this.makeButton(row.is_durable)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {this.makeButton(row.is_stalled)}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.ack_wait}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.max_inflight}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.pending_count}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+            </Grid>
           </Grid>
         </Container>
       </main>

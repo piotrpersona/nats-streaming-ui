@@ -45,20 +45,22 @@ class Channels extends React.Component {
   update() {
     this.socket.emit("get_channels");
     this.socket.on("channels_received", data => {
-      const channels = data.channels.map(chn => {
-        return {
-          name: chn.name,
-          messages: chn.msgs,
-          messages_size: `${Number(chn.bytes / 1024 / 1024).toFixed(2)} Mb`,
-          subscriptions: Array.isArray(chn.subscriptions)
-            ? chn.subscriptions.length
-            : 0,
-          last_sequential: chn.last_seq
-        };
-      });
-      this.setState({
-        channels
-      });
+      if (data.channels) {
+        const channels = data.channels.map(chn => {
+          return {
+            name: chn.name,
+            messages: chn.msgs,
+            messages_size: `${Number(chn.bytes / 1024 / 1024).toFixed(2)} Mb`,
+            subscriptions: Array.isArray(chn.subscriptions)
+              ? chn.subscriptions.length
+              : 0,
+            last_sequential: chn.last_seq
+          };
+        });
+        this.setState({
+          channels
+        });
+      }
     });
   }
 
@@ -74,7 +76,6 @@ class Channels extends React.Component {
   }
 
   channelNameMessagesHandler(event) {
-    console.log(event);
     this.setState({
       channelNameMessage: event.target.value
     });
