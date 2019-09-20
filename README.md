@@ -3,7 +3,7 @@ Powerful dashboard for the [Nats Streaming](https://nats-io.github.io/docs/nats_
 
 ___
 
-![alt text](./docs/Instruction.gif "Nats Streaming UI")
+![alt text](./docs/screenshots.gif "Nats Streaming UI")
 
 
 ## Features
