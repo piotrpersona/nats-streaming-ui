@@ -1,0 +1,11 @@
+version: "3"
+services:
+  nats-streaming-ui:
+    build: .
+    ports:
+      - "8282:8282"
+    networks:
+      - backend
+
+networks:
+  backend:

@@ -1,0 +1,3 @@
+apps:
+  - script: ./server/index.js
+    name: "Main app"
