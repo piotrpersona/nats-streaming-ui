@@ -49,16 +49,18 @@ const handler = async client => {
 
     let subscriptions = [];
 
-    resp.data.channels.forEach(channel => {
-      if (Array.isArray(channel.subscriptions)) {
-        subscriptions.push(
-          ...channel.subscriptions.map(subscriptions => {
-            subscriptions.channel_name = channel.name;
-            return subscriptions;
-          })
-        );
-      }
-    });
+    if (resp.data.channels) {
+      resp.data.channels.forEach(channel => {
+        if (Array.isArray(channel.subscriptions)) {
+          subscriptions.push(
+            ...channel.subscriptions.map(subscriptions => {
+              subscriptions.channel_name = channel.name;
+              return subscriptions;
+            })
+          );
+        }
+      });
+    }
 
     client.emit("subscriptions_received", { subscriptions });
   };

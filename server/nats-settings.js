@@ -1,8 +1,8 @@
 const { getInstance } = require("nats-nerve");
 
 const defaults = {
-  server: process.env.STAN_URL || "nats://localhost:4222",
-  monitor: process.env.STAN_MONITOR_URL || "http://localhost:8222",
+  server: process.env.STAN_URL || "nats://127.0.0.1:4222",
+  monitor: process.env.STAN_MONITOR_URL || "http://127.0.0.1:8222",
   cluster: process.env.STAN_CLUSTER || "test-cluster",
   appName: "nats-streaming-ui"
 };
