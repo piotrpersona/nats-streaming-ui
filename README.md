@@ -3,7 +3,7 @@ Powerful dashboard for the [Nats Streaming](https://nats-io.github.io/docs/nats_
 
 ___
 
-![alt text](https://gitlab.com/utt-combinedtrip/nats-streaming-ui/raw/master/docs/screenshots.gif "Nats Streaming UI")
+<img src="https://gitlab.com/united-travel-tickets/common/nats-streaming-ui/raw/master/docs/screenshots.gif" alt="Nats Streaming UI" />
 
 
 ## Features
