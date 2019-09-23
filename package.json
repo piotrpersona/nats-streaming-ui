@@ -16,7 +16,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:united-travel-tickets/common/nats-streaming-ui.git"
+    "url": "https://gitlab.com/united-travel-tickets/common/nats-streaming-ui.git"
   },
   "scripts": {
     "start:server:dev": "DEBUG=* nodemon ./server/index.js",
