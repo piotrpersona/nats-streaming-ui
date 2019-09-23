@@ -11,8 +11,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+
 import shortid from "shortid";
-import io from "socket.io-client";
+
+import { socket } from "../../services/ws";
 
 class Clients extends React.Component {
   state = { clients: [], socket: null };
@@ -27,13 +29,12 @@ class Clients extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("/");
+    this.socket = socket;
     this.update();
   }
 
   componentWillUnmount() {
-    this.socket.close();
-    this.socket = null;
+    this.socket.off();
   }
   render() {
     return (

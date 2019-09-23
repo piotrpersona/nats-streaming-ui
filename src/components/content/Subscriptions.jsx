@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router";
+
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-
-import io from "socket.io-client";
 import Typography from "@material-ui/core/Typography";
 import Fab from "@material-ui/core/Fab";
 import Refresh from "@material-ui/icons/Refresh";
@@ -17,6 +16,8 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 
 import shortid from "shortid";
+
+import { socket } from "../../services/ws";
 
 class Subscriptions extends React.Component {
   state = { subscriptions: [], socket: null };
@@ -37,13 +38,12 @@ class Subscriptions extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("/");
+    this.socket = socket;
     this.update();
   }
 
   componentWillUnmount() {
-    this.socket.close();
-    this.socket = null;
+    this.socket.off();
   }
 
   render() {
