@@ -30,6 +30,8 @@ yarn build
 node ./server/index.js
 ```
 
+## Issues
+Let us know about any issues by [GitLab](https://gitlab.com/united-travel-tickets/common/nats-streaming-ui/issues)
 
 ## Credits
 - [React](https://reactjs.org)
