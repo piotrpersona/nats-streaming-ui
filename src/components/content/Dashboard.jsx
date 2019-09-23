@@ -15,7 +15,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
-import io from "socket.io-client";
+import { socket } from "../../services/ws";
 
 class Dashboard extends React.Component {
   state = { dashboard: null, counter: null, socket: null };
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("/");
+    this.socket = socket;
 
     this.update();
 
@@ -46,8 +46,7 @@ class Dashboard extends React.Component {
   componentWillUnmount() {
     clearInterval(this.state.counter);
 
-    this.socket.close();
-    this.socket = null;
+    // this.socket.off();
   }
 
   render() {

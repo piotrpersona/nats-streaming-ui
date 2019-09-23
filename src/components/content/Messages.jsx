@@ -15,13 +15,14 @@ import Paper from "@material-ui/core/Paper";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import ClearRoundedIcon from "@material-ui/icons/ClearRounded";
 
-import io from "socket.io-client";
 import shortid from "shortid";
+
+import { socket } from "../../services/ws";
 
 class Messages extends React.Component {
   state = { messages: [], socket: null, channelId: null };
   componentDidMount() {
-    this.socket = io("/");
+    this.socket = socket;
 
     this.setState(
       {
@@ -43,8 +44,7 @@ class Messages extends React.Component {
   }
 
   componentWillUnmount() {
-    this.socket.close();
-    this.socket = null;
+    this.socket.off();
   }
 
   makeButton(status) {

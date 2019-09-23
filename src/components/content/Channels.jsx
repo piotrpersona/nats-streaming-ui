@@ -28,8 +28,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import io from "socket.io-client";
 import shortid from "shortid";
+
+import { socket } from "../../services/ws";
 
 class Channels extends React.Component {
   state = {
@@ -65,14 +66,13 @@ class Channels extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = io("/");
+    this.socket = socket;
 
     this.update();
   }
 
   componentWillUnmount() {
-    this.socket.close();
-    this.socket = null;
+    this.socket.off();
   }
 
   channelNameMessagesHandler(event) {
