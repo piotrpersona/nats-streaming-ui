@@ -6,7 +6,7 @@ RUN yarn global add pm2
 
 WORKDIR /opt/nats-streaming-ui
 
-RUN yarn install && yarn build
+RUN yarn install && yarn run build:react
 RUN chmod +x ./makeRealIP.sh
 
 EXPOSE 8282
