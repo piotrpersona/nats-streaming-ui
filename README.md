@@ -24,9 +24,9 @@ Follow the link http://127.0.0.1:8282
 ## How to run locally
 
 ```shell script
-git https://gitlab.com/utt-combinedtrip/nats-streaming-ui.git
+git https://gitlab.com/united-travel-tickets/common/nats-streaming-ui.git
 cd nats-streaming-ui
-yarn build
+yarn run build:react
 node ./server/index.js
 ```
 
