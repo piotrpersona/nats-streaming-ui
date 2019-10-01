@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getNerveInstance, options } = require("../nats-settings");
+const { getNerveInstance, options } = require("../settings");
 
 const handler = async client => {
   const nerve = await getNerveInstance();
@@ -146,29 +146,33 @@ const handler = async client => {
   const getMessages = async data => {
     const messages = [];
 
-    const response = await axios({
-      method: "get",
-      baseURL: options.monitor,
-      url: `/streaming/channelsz?channel=${data.channelName}`,
-      headers: { Accept: "application/json" },
-      proxy: false
-    });
-
-    const numOfMessages = response.data.msgs;
-
-    await nerve.subscribe(data.channelName, msg => {
-      messages.push({
-        sequence: msg.getSequence(),
-        timestamp: msg.getTimestamp(),
-        subject: msg.getSubject(),
-        data: msg.getData(),
-        isRedelivered: msg.isRedelivered()
+    try {
+      const response = await axios({
+        method: "get",
+        baseURL: options.monitor,
+        url: `/streaming/channelsz?channel=${data.channelName}`,
+        headers: { Accept: "application/json" },
+        proxy: false
       });
 
-      if (numOfMessages === messages.length) {
-        client.emit("messages_received", messages);
-      }
-    });
+      const numOfMessages = response.data.msgs;
+
+      await nerve.subscribe(data.channelName, msg => {
+        messages.push({
+          sequence: msg.getSequence(),
+          timestamp: msg.getTimestamp(),
+          subject: msg.getSubject(),
+          data: msg.getData(),
+          isRedelivered: msg.isRedelivered()
+        });
+
+        if (numOfMessages === messages.length) {
+          client.emit("messages_received", messages);
+        }
+      });
+    } catch {
+      client.emit("messages_received", []);
+    }
   };
 
   client.on("create_channel", createChannel);
