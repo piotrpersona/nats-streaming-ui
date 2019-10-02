@@ -8,12 +8,8 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import { DashboardItem } from "./DashboardItem";
 
 import { socket } from "../../services/ws";
 
@@ -46,15 +42,33 @@ class Dashboard extends React.Component {
   componentWillUnmount() {
     clearInterval(this.state.counter);
 
-    // this.socket.off();
+    this.socket.off();
   }
 
   render() {
     let uptime = null;
+    let maxChannels = null;
+    let maxMessages = null;
+    let maxSubscription = null;
+    let maxMemory = null;
     if (this.state.dashboard) {
       uptime = this.state.dashboard.uptime
         .replace(/m|h/g, ":")
         .replace(/s/g, "");
+      maxChannels = this.state.dashboard.store.limits.max_channels
+        ? this.state.dashboard.store.limits.max_channels
+        : "∞";
+      maxMessages = this.state.dashboard.store.limits.max_msgs
+        ? this.state.dashboard.store.limits.max_msgs
+        : "∞";
+      maxSubscription = this.state.dashboard.store.limits.max_subscriptions
+        ? this.state.dashboard.store.limits.max_subscriptions
+        : "∞";
+      maxMemory = this.state.dashboard.store.limits.max_bytes
+        ? `${Number(
+            this.state.dashboard.store.limits.max_bytes / 1024 / 1024
+          ).toFixed(2)} Mb`
+        : "∞";
     }
 
     return (
@@ -156,108 +170,52 @@ class Dashboard extends React.Component {
               <Grid item xs={12} md={12} lg={6}>
                 <Paper className={clsx("paper", "dashboard-cards")}>
                   <List subheader={<ListSubheader>Server</ListSubheader>}>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="ID" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.server_id}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Cluster" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.cluster_id}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Version" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.version}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="State" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.state}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Golang version" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.go_version}
-                      </ListItemSecondaryAction>
-                    </ListItem>
+                    <DashboardItem
+                      type="ID"
+                      content={this.state.dashboard.server_id}
+                    />
+                    <DashboardItem
+                      type="Cluster"
+                      content={this.state.dashboard.cluster_id}
+                    />
+                    <DashboardItem
+                      type="Version"
+                      content={this.state.dashboard.version}
+                    />
+                    <DashboardItem
+                      type="State"
+                      content={this.state.dashboard.state}
+                    />
+                    <DashboardItem
+                      type="Golang version"
+                      content={this.state.dashboard.go_version}
+                    />
                   </List>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={12} lg={6}>
                 <Paper className={clsx("paper", "dashboard-cards")}>
                   <List subheader={<ListSubheader>Storage</ListSubheader>}>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Type" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.store.type}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Channels limit" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.store.limits.max_channels}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Messages limit" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.store.limits.max_msgs}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Subscriptions limit" />
-                      <ListItemSecondaryAction>
-                        {this.state.dashboard.store.limits.max_subscriptions}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon>
-                        <ArrowRightIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Memory size limit" />
-                      <ListItemSecondaryAction>
-                        {Number(
-                          this.state.dashboard.store.limits.max_bytes /
-                            1024 /
-                            1024
-                        ).toFixed(2)}{" "}
-                        Mb
-                      </ListItemSecondaryAction>
-                    </ListItem>
+                    <DashboardItem
+                      type="Type"
+                      content={this.state.dashboard.store.type}
+                    />
+                    <DashboardItem
+                      type="Channels limit"
+                      content={maxChannels}
+                    />
+                    <DashboardItem
+                      type="Messages limit"
+                      content={maxMessages}
+                    />
+                    <DashboardItem
+                      type="Subscriptions limit"
+                      content={maxSubscription}
+                    />
+                    <DashboardItem
+                      type="Memory size limit"
+                      content={maxMemory}
+                    />
                   </List>
                 </Paper>
               </Grid>
