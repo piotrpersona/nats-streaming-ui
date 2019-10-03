@@ -121,6 +121,14 @@ ul a {
   margin-top: 20px !important;
 }
 
+.isOnline {
+  background-color: #43a047 !important;
+}
+
+.isOffline {
+  background-color: #FF5252 !important;
+}
+
 .colored-navbar {
   background: #303f9f;
   background: -webkit-linear-gradient(45deg, #303f9f, #7b1fa2) !important;

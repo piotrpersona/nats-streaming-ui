@@ -4,17 +4,22 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
+import Avatar from "@material-ui/core/Avatar";
 import MenuIcon from "@material-ui/icons/Menu";
 
 import { useStyles } from "../../cssinjs";
 
 const Header = props => {
-  const { open, handleDrawerOpen } = props;
+  const { open, handleDrawerOpen, status } = props;
   const classes = useStyles();
   return (
     <AppBar
       position="absolute"
-      className={clsx(classes.appBar, open && classes.appBarShift, "colored-navbar")}
+      className={clsx(
+        classes.appBar,
+        open && classes.appBarShift,
+        "colored-navbar"
+      )}
     >
       <Toolbar className={classes.toolbar}>
         <IconButton
@@ -35,6 +40,9 @@ const Header = props => {
         >
           NATS Console
         </Typography>
+        <Avatar className={status ? "isOnline" : "isOffline"}>
+          {status ? "ON" : "OFF"}
+        </Avatar>
       </Toolbar>
     </AppBar>
   );

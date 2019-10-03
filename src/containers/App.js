@@ -10,44 +10,85 @@ import { SubscriptionsRouter } from "../components/content/Subscriptions";
 import { ClientsRouter } from "../components/content/Clients";
 import { MessagesRouter } from "../components/content/Messages";
 
-function App() {
-  const isOpened = localStorage.getItem("open") !== "false";
-  const [open, setOpen] = React.useState(isOpened);
+import { socket } from "../services/ws";
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+class AppClass extends React.Component {
+  state = {
+    menuOpen: localStorage.getItem("open") !== "false",
+    isOnline: false
+  };
+
+  componentDidMount() {
+    this.socket = socket;
+
+    const counter = setInterval(() => {
+      this.checkStatus();
+    }, 5000);
+
+    this.setState({
+      counter
+    });
+
+    this.checkStatus();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.counter);
+
+    this.socket.off();
+  }
+
+  checkStatus() {
+    this.socket.emit("is_online");
+
+    this.socket.on("is_online_result", data => {
+      this.setState({
+        isOnline: data
+      });
+    });
+  }
+
+  handleDrawerOpen() {
+    this.setState({
+      menuOpen: true
+    });
     localStorage.setItem("open", "true");
-  };
+  }
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  handleDrawerClose() {
+    this.setState({
+      menuOpen: false
+    });
     localStorage.setItem("open", "false");
-  };
+  }
 
-  return (
-    <div className="app">
-      <Router>
-        <CssBaseline />
-        <Header
-          open={open}
-          setOpen={setOpen}
-          handleDrawerOpen={handleDrawerOpen}
-        />
-        <Sidebar
-          handleDrawerClose={handleDrawerClose}
-          open={open}
-          setOpen={setOpen}
-        />
+  render() {
+    return (
+      <div className="app">
+        <Router>
+          <CssBaseline />
+          <Header
+            open={this.state.menuOpen}
+            setOpen={this.handleDrawerOpen.bind(this)}
+            handleDrawerOpen={this.handleDrawerOpen.bind(this)}
+            status={this.state.isOnline}
+          />
+          <Sidebar
+            handleDrawerClose={this.handleDrawerClose.bind(this)}
+            open={this.state.menuOpen}
+            setOpen={this.handleDrawerOpen.bind(this)}
+          />
 
-        <Route path="/" exact component={DashboardRouter} />
+          <Route path="/" exact component={DashboardRouter} />
 
-        <Route path="/channels/:id" exact component={MessagesRouter} />
-        <Route path="/channels" exact component={ChannelsRouter} />
-        <Route path="/subscriptions" component={SubscriptionsRouter} />
-        <Route path="/clients" component={ClientsRouter} />
-      </Router>
-    </div>
-  );
+          <Route path="/channels/:id" exact component={MessagesRouter} />
+          <Route path="/channels" exact component={ChannelsRouter} />
+          <Route path="/subscriptions" component={SubscriptionsRouter} />
+          <Route path="/clients" component={ClientsRouter} />
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default AppClass;

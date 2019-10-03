@@ -2,8 +2,9 @@ const axios = require("axios");
 const { getNerveInstance, options } = require("../settings");
 
 const handler = async client => {
-  const nerve = await getNerveInstance();
-
+  const nerve = await getNerveInstance().catch(e => {
+    console.log(e);
+  });
   /**
    * @desc creating new channel
    */
@@ -95,54 +96,63 @@ const handler = async client => {
    * @desc getting dashboards data
    */
   const getDashboard = async () => {
-    const resp = await axios({
-      method: "get",
-      baseURL: options.monitor,
-      url: "/streaming/serverz",
-      headers: { Accept: "application/json" },
-      proxy: false
-    });
-    const store = await axios({
-      method: "get",
-      baseURL: options.monitor,
-      url: "/streaming/storez",
-      headers: { Accept: "application/json" },
-      proxy: false
-    });
+    try {
+      const resp = await axios({
+        method: "get",
+        baseURL: options.monitor,
+        url: "/streaming/serverz",
+        headers: { Accept: "application/json" },
+        proxy: false
+      });
+      const store = await axios({
+        method: "get",
+        baseURL: options.monitor,
+        url: "/streaming/storez",
+        headers: { Accept: "application/json" },
+        proxy: false
+      });
 
-    const {
-      clients,
-      subscriptions,
-      channels,
-      total_msgs,
-      total_bytes,
-      uptime,
-      cluster_id,
-      server_id,
-      version,
-      go,
-      state
-    } = resp.data;
+      const {
+        clients,
+        subscriptions,
+        channels,
+        total_msgs,
+        total_bytes,
+        uptime,
+        cluster_id,
+        server_id,
+        version,
+        go,
+        state
+      } = resp.data;
 
-    client.emit("dashboard_received", {
-      clients,
-      channels,
-      subscriptions,
-      messages: total_msgs,
-      size: total_bytes,
-      uptime,
-      cluster_id,
-      server_id,
-      version,
-      go_version: go,
-      state,
-      store: {
-        type: store.data.type,
-        limits: store.data.limits
-      }
-    });
+      client.emit("dashboard_received", {
+        clients,
+        channels,
+        subscriptions,
+        messages: total_msgs,
+        size: total_bytes,
+        uptime,
+        cluster_id,
+        server_id,
+        version,
+        go_version: go,
+        state,
+        store: {
+          type: store.data.type,
+          limits: store.data.limits
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
+  /**
+   * @desc Getting messages for channel
+   * @param data
+   * @returns {Promise<void>}
+   */
   const getMessages = async data => {
     const messages = [];
 
@@ -175,6 +185,15 @@ const handler = async client => {
     }
   };
 
+  /**
+   * @desc Checking Nats server status
+   * @returns {Promise<void>}
+   */
+  const isOnline = async () => {
+    const isConnected = nerve.conn.nc.connected || false;
+    client.emit("is_online_result", isConnected);
+  };
+
   client.on("create_channel", createChannel);
   client.on("send_message", sendMessage);
   client.on("get_channels", getChannels);
@@ -182,6 +201,7 @@ const handler = async client => {
   client.on("get_clients", getClients);
   client.on("get_dashboard", getDashboard);
   client.on("get_messages", getMessages);
+  client.on("is_online", isOnline);
 };
 
 module.exports = { handler };
