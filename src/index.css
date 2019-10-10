@@ -126,9 +126,12 @@ ul a {
 }
 
 .isOffline {
-  background-color: #FF5252 !important;
+  background-color: #ff5252 !important;
 }
-
+.paper-table {
+  max-height: 74vh;
+  overflow-x: hidden;
+}
 .colored-navbar {
   background: #303f9f;
   background: -webkit-linear-gradient(45deg, #303f9f, #7b1fa2) !important;

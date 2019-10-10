@@ -77,8 +77,8 @@ class Messages extends React.Component {
 
           <Grid container spacing={3}>
             <Grid item xs={6} md={6} lg={12}>
-              <Paper className="table-content">
-                <Table>
+              <Paper className="table-content paper-table">
+                <Table stickyHeader={true}>
                   <TableHead>
                     <TableRow>
                       <TableCell>Sequence</TableCell>

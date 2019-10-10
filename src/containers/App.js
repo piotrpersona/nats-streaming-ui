@@ -12,7 +12,7 @@ import { MessagesRouter } from "../components/content/Messages";
 
 import { socket } from "../services/ws";
 
-class AppClass extends React.Component {
+class AppClass extends React.PureComponent {
   state = {
     menuOpen: localStorage.getItem("open") !== "false",
     isOnline: false
