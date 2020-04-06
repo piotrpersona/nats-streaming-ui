@@ -109,6 +109,7 @@ class Channels extends React.Component {
 
   createChannel() {
     this.socket.emit("create_channel", { channelName: this.state.channelName });
+    this.state.channels.push({name: this.state.channelName});
     this.socket.on("channel_created", message => {
       this.setState({
         openDialogChannel: false

@@ -1,6 +1,8 @@
 const axios = require("axios");
 const { getNerveInstance, options } = require("../settings");
 
+const history = {};
+
 const handler = async client => {
   const nerve = await getNerveInstance().catch(e => {
     console.log(e);
@@ -10,6 +12,21 @@ const handler = async client => {
    */
   const createChannel = async data => {
     await nerve.publisher.publish(data.channelName, "\n");
+
+    history[data.channelName] = [];
+
+    await nerve.subscribe(data.channelName, msg => {
+      console.log(`subs channel: ${data.channelName}. msg: ${Object.getOwnPropertyNames(msg)}`)
+      
+      history[data.channelName].push({
+        sequence: msg.getSequence(),
+        timestamp: msg.getTimestamp(),
+        subject: msg.getSubject(),
+        data: msg.getData(),
+        isRedelivered: msg.isRedelivered()
+      });
+    });
+
     client.emit("channel_created");
   };
 
@@ -144,7 +161,8 @@ const handler = async client => {
         }
       });
     } catch (e) {
-      console.log(e);
+      console.error(e.message);
+      console.log(`history: ${JSON.stringify(history)}`);
     }
   };
 
@@ -181,7 +199,7 @@ const handler = async client => {
         }
       });
     } catch {
-      client.emit("messages_received", []);
+      client.emit("messages_received", history[data.channelName].sort((a, b) => b.sequence - a.sequence) || []);
     }
   };
 
