@@ -37,6 +37,9 @@ class Messages extends React.Component {
   update() {
     this.socket.emit("get_messages", { channelName: this.state.channelId });
     this.socket.on("messages_received", messages => {
+      if (Array.isArray(messages)){
+        messages.sort((a, b) => b.sequence - a.sequence);
+      }
       this.setState({
         messages: messages
       });
