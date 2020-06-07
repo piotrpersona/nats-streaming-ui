@@ -13,7 +13,7 @@ const handler = async client => {
    */
   const createChannel = async data => {
     console.log('createChannel');
-    
+
     if (monitoring) {
       await nerve.publisher.publish(data.channelName, "\n");
     } else {
@@ -220,7 +220,7 @@ const handler = async client => {
           messages.push(...channel.messages.sort((a, b) => b.sequence - a.sequence))
         }
         client.emit("messages_received", messages);
-      }      
+      }
     } catch {
       client.emit("messages_received", []);
     }
@@ -231,8 +231,10 @@ const handler = async client => {
    * @returns {Promise<void>}
    */
   const isOnline = async () => {
-    const isConnected = nerve.conn.nc.connected || false;
-    client.emit("is_online_result", isConnected);
+    try{
+      const isConnected = nerve.conn.nc.connected || false;
+      client.emit("is_online_result", isConnected);
+    }catch (e) { }
   };
 
   const isMonitoring = async () => {

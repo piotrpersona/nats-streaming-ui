@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
       this.state.dashboard && (
         <main className="content">
           <Container maxWidth={false} className="container">
-            <Grid container spacing={3}>
+            <Grid container spacing={3}  className="grid-fixed-container">
               <Grid item xs={12} md={12} lg={2}>
                 <Paper className={clsx("paper", "card-item", "gradient-cyan")}>
                   <Typography variant="h4" component="h2" align="center">

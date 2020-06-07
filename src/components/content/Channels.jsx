@@ -134,7 +134,7 @@ class Channels extends React.Component {
     return (
       <main className="content">
         <Container maxWidth={false} className="container">
-          <Grid container spacing={3}>
+          <Grid container spacing={3}  className="grid-fixed-container">
             <Grid item xs={6} md={6} lg={1}>
               <Typography
                 variant="h5"

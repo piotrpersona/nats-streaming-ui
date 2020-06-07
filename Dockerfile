@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:current-alpine
 
 COPY . /opt/nats-streaming-ui
 
