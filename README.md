@@ -17,6 +17,13 @@ Powerful dashboard for the [Nats Streaming](https://nats-io.github.io/docs/nats_
 ## How to run with Docker
 
 ```shell script
+docker run -p 8282:8282 \
+  -e STAN_URL=http://nats-url:4222 \
+  -e STAN_MONITOR_URL=http://nats-url:8222 \
+  piotrpersona/nats-streaming-ui:latest
+```
+
+```shell script
 docker-compose build && docker-compose up
 ```
 
