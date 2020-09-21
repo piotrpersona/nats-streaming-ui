@@ -37,6 +37,7 @@ Let us know about any issues by [GitLab](https://gitlab.com/united-travel-ticket
 
 ## Credits
 
+- [Origin](https://gitlab.com/united-travel-tickets/common/nats-streaming-ui)
 - [React](https://reactjs.org)
 - [Socket.io](https://socket.io/)
 - [Express](https://expressjs.com)
@@ -48,5 +49,6 @@ Let us know about any issues by [GitLab](https://gitlab.com/united-travel-ticket
 
 ## Inspired By
 
+- [GitLab original source](https://gitlab.com/united-travel-tickets/common/nats-streaming-ui)
 - [nats-streaming-console by KualiCo](https://github.com/KualiCo/nats-streaming-console)
 - Google Cloud Pub/Sub
