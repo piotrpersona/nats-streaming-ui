@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - uses: azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_SECRET }}
+    - name: Upload docker image
+      run: |
+        IMAGE=piotrpersona/nats-streaming-ui
+        TAG=$GITHUB_SHA-$GITHUB_RUN_ID
+        docker build -t $IMAGE:$TAG .
+        docker push $IMAGE:$TAG
+        docker tag $IMAGE:$TAG $IMAGE:latest
+        docker push $IMAGE:latest
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        docker tag $IMAGE:$TAG $IMAGE:$BRANCH
+        docker push $IMAGE:$BRANCH
