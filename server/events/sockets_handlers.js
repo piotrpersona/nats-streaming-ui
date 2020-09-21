@@ -127,7 +127,6 @@ const handler = async client => {
    * @desc getting dashboards data
    */
   const getDashboard = async () => {
-    console.log('getDashboard');
     try {
       const resp = await axios({
         method: "get",
