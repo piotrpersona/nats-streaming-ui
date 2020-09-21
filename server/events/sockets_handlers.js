@@ -12,7 +12,6 @@ const handler = async client => {
    * @desc creating new channel
    */
   const createChannel = async data => {
-    console.log('createChannel');
 
     if (monitoring) {
       await nerve.publisher.publish(data.channelName, "\n");
@@ -37,7 +36,6 @@ const handler = async client => {
    * @desc sending message to the channel
    */
   const sendMessage = async data => {
-    console.log('sendMessage');
     await nerve.publisher.publish(data.channelName, data.message);
     client.emit("message_sent");
   };
@@ -46,7 +44,6 @@ const handler = async client => {
    * @desc getting channels
    */
   const getChannels = async () => {
-    console.log('getChannels');
     try {
       const resp = await axios({
         method: "get",
@@ -65,7 +62,6 @@ const handler = async client => {
    * @desc getting subscriptions
    */
   const getSubscription = async () => {
-    console.log('getSubscription');
     try {
       const resp = await axios({
         method: "get",
@@ -100,7 +96,6 @@ const handler = async client => {
    * @desc getting clients
    */
   const getClients = async () => {
-    console.log('getClients');
     const resp = await axios({
       method: "get",
       baseURL: options.monitor,
@@ -185,7 +180,6 @@ const handler = async client => {
    * @returns {Promise<void>}
    */
   const getMessages = async data => {
-    console.log('getMessages');
     const messages = [];
     let response;
     try {
