@@ -20,11 +20,8 @@ Powerful dashboard for the [Nats Streaming](https://nats-io.github.io/docs/nats_
 docker run -p 8282:8282 \
   -e STAN_URL=http://nats-url:4222 \
   -e STAN_MONITOR_URL=http://nats-url:8222 \
+  -e STAN_CLUSTER=test-cluster \
   piotrpersona/nats-streaming-ui:latest
-```
-
-```shell script
-docker-compose build && docker-compose up
 ```
 
 Follow the link http://127.0.0.1:8282
