@@ -8,12 +8,13 @@ services:
     networks:
       - backend
 
-#  nats-streaming-ui:
-#    build: .
-#    ports:
-#      - "8282:8282"
-#    networks:
-#      - backend
+  nats-streaming-ui:
+    build: .
+    image: piotrpersona/nats-ui:latest
+    ports:
+      - "8282:8282"
+    networks:
+      - backend
 
 networks:
   backend:
