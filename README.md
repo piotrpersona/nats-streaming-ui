@@ -2,6 +2,7 @@
 
 Powerful dashboard for the [Nats Streaming](https://nats-io.github.io/docs/nats_streaming/intro.html)
 
+![CI](https://github.com/piotrpersona/nats-streaming-ui/workflows/CI/badge.svg)
 <a href="https://www.npmjs.com/package/nats-streaming-ui"><img src="https://badgen.net/npm/v/nats-streaming-ui?icon=npm&label" alt="NPM" title="NPM" /></a>
 <img src="https://badgen.net/npm/license/nats-streaming-ui" />
 
